@@ -1,0 +1,57 @@
+{%  block content %}
+<head>
+	<meta charset="UTF-8">
+    {% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Webapp_Portfolio/css/table.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<section>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <thead>
+                <tr>
+                  <th class="th-left">item</th>
+                  <th>amount</th>
+                  <th>unit price</th>
+                  <th style="white-space: nowrap;">total volume</th>
+                  <th style="text-align:center">Trade</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+                {% regroup mongo_user.account|dictsort:"group_order" by group as account_grouped %}
+                {% for group in account_grouped %}
+                    <tr><th class="th-group" colspan="5">{{ group.grouper }}</th></tr>
+                    {% for tradeable in group.list %}
+                        <tr>
+                           <td class="td-txt">{{ tradeable.name }}</td>
+                           <td class="td-cur">{{ tradeable.amount }}</td>
+                           <td class="td-cur">{{ tradeable.price }}</td>
+                           <td class="td-cur">{{ tradeable.total }}</td>
+                           {% if group.grouper == "COMMODITIES" or group.grouper == "CURRENCIES" %}
+                            <td class="td-cur"><form method="POST" action="trade/"> {% csrf_token %}
+                                <input type="number" step="0.01" name="{{ group.grouper }}_{{ tradeable.name }}" placeholder=" +buy or -sell" style="height:19px; border-radius:0.25rem; font-size:10px; width:70px">
+                                <input type="submit" value="save" class="tbl-button">
+                            </form></td>
+                           {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    </section>
+
+	<script src="{% static 'Webapp_Portfolio/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'Webapp_Portfolio/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+	<script src="{% static 'Webapp_Portfolio/js/table.js' %}"></script>
+
+</body>
+
+{% endblock %}

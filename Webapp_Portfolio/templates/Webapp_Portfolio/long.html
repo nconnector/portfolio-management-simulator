@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Webapp</title>
+
+    {% load staticfiles %}
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'Webapp_Portfolio/css/resume.min.css' %}" type="text/css"/>
+    <link href="{% static 'Webapp_Portfolio/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="{% static 'Webapp_Portfolio/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Webapp_Portfolio/vendor/devicons/css/devicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Webapp_Portfolio/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Webapp_Portfolio/css/resume.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">MENU:
+          {% if messages %}
+            {% for message in messages %}
+              <script>M.toast({html: "{{message}}", displayLength: 2000});</script>
+            {% endfor %}
+          {% endif %}
+        </span>
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'Webapp_Portfolio/images/profile.jpg' %}" alt="">
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+
+          {% include "Webapp_Portfolio/menu.html" %}
+
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid p-0">
+      {% if user.is_authenticated %}
+          <section class="resume-section p-3 p-lg-5 d-flex d-column" id="main">
+            <div class="my-auto">
+              <h1 class="mb-0">
+                <span style="white-space: nowrap;">$ {{ mongo_user.balance }} </span>
+                <span style="white-space: nowrap;" class="text-primary">cash equivalent</span>
+              </h1>
+                <div class="subheading mb-5"><h3>Rank {{ mongo_user.rank }} out of<span class="text-primary"> {{ mongo_user.rankCount }}</span></h3>
+              </div>
+              <p class="mb-5">This is your total balance in US dollars on {{ datetime }}
+                <br>Total balance includes all of your cash and near-cash assests at their respective current valuations</p>
+            </div>
+          </section>
+
+          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="balance">
+            <div class="my-auto">
+              <div class="subheading mb-5"><h3><span class="text-primary"> {{ datetime }} </span></h3>
+              <h2 class="mb-5">Total Balance</h2>
+            </div>
+            <div>
+                {% include "Webapp_Portfolio/portfolio_balance_table.html" %}
+            </div>
+            </div>
+          </section>
+
+          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="history">
+            <div class="my-auto">
+              <h2 class="mb-5">Your History</h2>
+
+            <div>
+                {% include "Webapp_Portfolio/portfolio_history_table.html" %}
+            </div>
+
+            </div>
+          </section>
+
+      <!--
+          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="markets">
+            <div class="my-auto">
+              <h2 class="mb-5">Markets</h2>
+
+              <div class="resume-item d-flex flex-column flex-md-row mb-5">
+                <div class="resume-content mr-auto">
+                  <h3 class="mb-0">Market info Dashboard</h3>
+                  <div class="subheading mb-3">div h4</div>
+                  <div>subdiv</div>
+                </div>
+                <div class="resume-date text-md-right">
+                  <span class="text-primary">service div</span>
+                </div>
+              </div>
+
+              <div class="resume-item d-flex flex-column flex-md-row mb-5">
+                <div class="resume-content mr-auto">
+                  <h3 class="mb-0">More info Dashboards</h3>
+                  <div class="subheading mb-3">div h4</div>
+                  <div>subdiv</div>
+                </div>
+                <div class="resume-date text-md-right">
+                  <span class="text-primary">service div</span>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="trade1">
+            <div class="my-auto">
+              <h2 class="mb-5">Trade</h2>
+
+              <div class="subheading mb-3">Conduct trade actions</div>
+
+              <div class="subheading mb-3">What's to expect here:</div>
+              <ul class="fa-ul mb-0">
+                <li>
+                  <i class="fa-li fa fa-check"></i>
+                  Buy and sell commodities</li>
+                <li>
+                  <i class="fa-li fa fa-check"></i>
+                  Trade in Forwards and Futures</li>
+                <li>
+                  <i class="fa-li fa fa-check"></i>
+                  Purchase Options</li>
+                <li>
+                  <i class="fa-li fa fa-check"></i>
+                  Acquire S&P 500 Stock</li>
+              </ul>
+            </div>
+          </section>
+          -->
+
+      {% else %}
+          <section class="resume-section p-3 p-lg-5 d-flex d-column" id="main">
+            <div class="my-auto">
+              <h1 class="mb-0">
+                <span style="white-space: nowrap;">Welcome to</span>
+                <span style="white-space: nowrap;" class="text-primary">cash equivalent</span>
+              </h1>
+                <div class="subheading mb-5"><h3><a style="color:#343a40;" href="/webapp/login/"><u>Please log in</u> </a><a href="/webapp/login/">or register</a></h3>
+              </div>
+              <p class="mb-5">N. Kuznetsov, 2018
+                <br>Powered by Python</p>
+            </div>
+          </section>
+      {% endif %}
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'Webapp_Portfolio/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'Webapp_Portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'Webapp_Portfolio/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'Webapp_Portfolio/js/resume.min.js' %}"></script>
+
+  </body>
+
+</html>

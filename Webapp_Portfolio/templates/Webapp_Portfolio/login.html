@@ -1,0 +1,29 @@
+{% extends "Webapp_Portfolio/header.html" %}
+{% block title %}Login page{% endblock %}
+
+{% block body %}
+          <h1 class="mb-0">
+            Log In
+          </h1>
+            <div class="container-fluid p-0">
+                {% block content %}
+
+                <h3>
+                    <span class="text-primary">
+                    Kindly use your University of Manitoba student ID as username
+                    </span>
+                </h3>
+                <br>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button class="btn" type="submit"> Submit. </button>
+                    </form><br>
+                If you don't already have an account, <a href="/webapp/register/">Register instead.</a>
+
+                {% endblock %}
+            </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,40 @@
+{%  block content %}
+<head>
+	<meta charset="UTF-8">
+    {% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Webapp_Portfolio/css/table.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<section>
+        <div class="subheading mb-3">{{ mongo_user.name }}, ID: {{ mongo_user.umid }}</div>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <thead>
+                <tr>
+                  <th class="th-left">timestamp</th>
+                  <th>transaction</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+                {% for transaction in mongo_user.history reversed %}
+                    <tr><td class="td-txt" colspan="2">{{ transaction }}</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    </section>
+
+	<script src="{% static 'Webapp_Portfolio/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'Webapp_Portfolio/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+	<script src="{% static 'Webapp_Portfolio/js/table.js' %}"></script>
+
+</body>
+
+{% endblock %}

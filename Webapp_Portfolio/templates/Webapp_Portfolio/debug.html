@@ -1,0 +1,24 @@
+{% extends "Webapp_Portfolio/header.html" %}
+{% block title %}Debug page{% endblock %}
+
+{% block body %}
+          <h1 class="mb-0">
+            Debug
+          </h1>
+            <div class="container-fluid p-0">
+                {% block content %}
+
+                <h3>
+                    If you see this page, please mention this to support at <span class="text-primary">kuznetsn@myumanitoba.ca</span>
+
+                </h3>
+                <br>
+                        {% csrf_token %}
+                        {{ var }}
+
+                {% endblock %}
+            </div>
+{% endblock %}
+
+
+
