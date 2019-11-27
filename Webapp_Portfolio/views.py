@@ -107,5 +107,5 @@ def instructor(request):
             'ranking_data': ranking_data,
         })
     else:
-        messages.error('you are not an instructor!')
+        print('not an instructor!')
         return redirect('webapp:index')

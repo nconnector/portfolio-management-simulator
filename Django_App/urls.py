@@ -21,5 +21,5 @@ urlpatterns = [
     #  url - regular expression, path - no regular expression
     #  re_path(r'^$/') - INDEX PAGE
     path('admin/', admin.site.urls),
-    re_path(r'^webapp/', include('Webapp_Portfolio.urls')),
+    path('', include('Webapp_Portfolio.urls')),
 ]
