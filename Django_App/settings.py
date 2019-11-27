@@ -12,9 +12,6 @@ config.read(str(Path(BASE_DIR) / 'config.ini'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config['DJANGO']['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = config['NETWORK']['HOSTS']
 
 
