@@ -12,11 +12,7 @@ config.read(str(Path(BASE_DIR) / 'config.ini'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config['DJANGO']['SECRET_KEY']
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = config['NETWORK']['HOSTS'].split(',')
-=======
-ALLOWED_HOSTS = config['NETWORK']['HOSTS']
->>>>>>> 5f558e505a60ccfafcdc47b4eaa426035180227c
 
 
 # Application definition
